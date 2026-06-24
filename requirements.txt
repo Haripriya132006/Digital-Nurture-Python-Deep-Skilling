@@ -1,6 +1,0 @@
-Flask
-requests
-pandas
-numpy
-gunicorn # Good for production on LinuxONE/cloud later
-# python-dotenv # Optional, but recommended for managing API keys
