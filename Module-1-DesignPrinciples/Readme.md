@@ -1,7 +1,9 @@
+
 # Module -1
 ## Design Pattern and Principles
 
 ### Principles 
+```text
 -> SOLID principle
 -> DRY principle (Dont Repeat Yourself):
           reduces redudency
@@ -11,8 +13,11 @@
           Never implement features until its absolutely necessary
 ->Composition over Inheritence:
           choose to reuse code by using polymorphic behaviour by combining simple objects rather than creating big parent class
+```
 ### Design Patterns
+```text
 there are mainly 3 types 
 -> Creational 
 -> Structural
 -> Behavioral
+```
