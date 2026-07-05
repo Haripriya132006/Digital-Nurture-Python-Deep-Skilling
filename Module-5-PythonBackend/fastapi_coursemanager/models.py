@@ -1,4 +1,4 @@
-from sqlalchemy import Column,Integer,String,Date,ForeignKey
+from sqlalchemy import Column,Integer,String,Date,ForeignKey,Boolean
 from database import Base
 
 class Department(Base):
@@ -33,4 +33,11 @@ class Enrollment(Base):
           course_id = Column(Integer, ForeignKey("courses.id", ondelete="CASCADE"), nullable=False) 
           enrollment_date=Column(Date,nullable=False)
           grade=Column(String,nullable=True)
+
+class User(Base):
+          __tablename__="users"
           
+          id=Column(Integer,primary_key=True,index=True)
+          email=Column(String,unique=True,index=True,nullable=False)
+          hashed_password=Column(String,nullable=False)
+          is_active=Column(Boolean,default=True)
