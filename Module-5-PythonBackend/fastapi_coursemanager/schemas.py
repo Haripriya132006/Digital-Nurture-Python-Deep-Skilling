@@ -1,5 +1,6 @@
-from pydantic import BaseModel
+from pydantic import BaseModel,EmailStr
 from typing import Optional,List
+from datetime import date
 
 class CourseCreate(BaseModel):
           name:str
@@ -27,3 +28,37 @@ class DepartmentResponse(BaseModel):
           
           class Config:
                     from_attributes=True
+
+class StudentCreate(BaseModel):
+          first_name: str
+          last_name: str
+          email: EmailStr
+          department_id: Optional[int] = None
+          enrollment_year: int
+class StudentResponse(BaseModel):
+          id:int
+          first_name:str
+          last_name:str
+          email:str
+          department_id:Optional[int]=None
+          enrollment_year:int
+          
+          class Config:
+                    from_attributes=True
+                    
+
+class EnrollmentCreate(BaseModel):
+          student_id: int
+          course_id: int
+          enrollment_date: date
+          grade: Optional[str] = None
+class EnrollmentResponse(BaseModel):
+          id:int
+          student_id:int
+          course_id:int
+          enrollment_date:date
+          grade:Optional[str]=None
+          
+          class Config:
+                    from_attributes=True
+                    
