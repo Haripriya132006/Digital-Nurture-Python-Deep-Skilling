@@ -10,3 +10,5 @@ OAuth LOGIN:
           details sent to dedicated Identity Provider(Google,Auth0)
           these apps exchange short-lived code to generate Access Token to the user
           Essential for 3rd party integrations (Sign in with google etc)
+
+![alt text](<Screenshot 2026-07-05 212553.png>)
