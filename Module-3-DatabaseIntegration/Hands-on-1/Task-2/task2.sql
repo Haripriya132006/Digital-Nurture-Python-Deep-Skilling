@@ -1,0 +1,40 @@
+-- =====================================================================
+-- TASK 2: VERIFY NORMALISATION ANALYSIS
+-- =====================================================================
+
+-- Step 6: 1NF (First Normal Form) Verification
+-- 1. All columns in our schema contain atomic (indivisible) values.
+--    For example, 'first_name' and 'last_name' are split rather than combined.
+-- 2. There are no repeating groups or comma-separated values in a single field.
+-- Hypothetical Violation Example: 
+-- If we added a 'phone_numbers' column to the 'students' table and stored 
+-- multiple numbers like '9876543210, 9123456789' in one row, it would violate 1NF.
+
+-- Step 7: 2NF (Second Normal Form) Verification
+-- 1. The schema is already in 1NF.
+-- 2. All tables use a single-column surrogate Primary Key (auto_increment IDs), 
+--    meaning partial dependencies are structurally impossible for those tables.
+-- 3. In the 'enrollments' table, the natural composite candidate key is 
+--    (student_id + course_id). The non-key attributes are 'enrollment_date' 
+--    and 'grade'. Both 'enrollment_date' and 'grade' require BOTH the 
+--    specific student AND the specific course to exist. You cannot have a 
+--    grade for a student without a course, nor a grade for a course without 
+--    a student. Therefore, they are fully functionally dependent on the 
+--    entire composite key. No partial dependencies exist.
+
+-- Step 8 & 9: 3NF (Third Normal Form) Verification & Enrollments Analysis
+-- 1. The schema is already in 2NF.
+-- 2. There are no transitive dependencies (where a non-key column determines 
+--    another non-key column).
+-- 3. In the 'enrollments' table, 'enrollment_id' determines everything. 
+--    The foreign keys 'student_id' and 'course_id' link to independent parent tables.
+--    Knowing a 'grade' does not tell you the enrollment date, or vice versa.
+--    Thus, there are no transitive functional dependencies in 'enrollments'.
+--
+-- Answer to Hint (Would storing dept_name in the students table violate 3NF?):
+-- Yes, it would violate 3NF. In 'students', student_id -> department_id, 
+-- and department_id -> dept_name. If we stored 'dept_name' directly inside 
+-- the 'students' table, 'student_id' would transitively determine 'dept_name' 
+-- via 'department_id' (student_id -> department_id -> dept_name). 
+-- By keeping 'dept_name' strictly inside the 'departments' table, 
+-- we successfully avoid a 3NF violation and prevent data redundancy.
