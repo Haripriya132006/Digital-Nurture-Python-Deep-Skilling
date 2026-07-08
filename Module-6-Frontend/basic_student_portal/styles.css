@@ -1,0 +1,106 @@
+*{
+          margin:0;
+          padding:0;
+          box-sizing: border-box;
+}
+
+body{
+          font-family: Arial, Helvetica, sans-serif;
+          background-color: cornflowerblue;
+          color:black;
+}
+header{
+          padding:1%;
+          background-color:darkblue;
+          color: aliceblue;
+          display: flex;
+          flex:1;
+          align-items: center;
+          justify-content: space-between;
+
+}
+header nav ul{
+          display: flex;
+
+          gap:1.5rem;
+          align-items: center;
+}
+header nav ul li{
+          list-style: none;
+          display: inline;
+          align-items: center;
+}
+header nav ul li a{
+          text-decoration:underline overline wavy wheat;
+          /* text-decoration:none; */
+          color: aliceblue;
+}
+#hero{
+          min-height: 10vh;
+          text-align: center;
+          padding: 1%;
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+          justify-content: center;
+}
+#hero h1{
+          font-size: clamp(1.5rem,3vh,2.5rem);
+}
+#hero button{
+          padding: 0.7%;
+          border: 3px double black ;
+          background-color: coral;
+          color: cornsilk;
+}
+#hero button:hover{
+          background-color: rgb(247, 108, 57);
+}
+
+.course-card{
+          min-width: 80%;
+          min-height: 8rem;
+          padding:2%;
+          border: 2px solid black;
+          border-radius: 2rem;
+          box-shadow: 2px 5px 10px black;
+          margin: 2%;
+          justify-self: center;
+          background-color: wheat;
+          justify-content: center;
+          text-align: center;
+          align-content: center;
+}
+.course-card:hover{
+          background-color: rgb(238, 197, 121);
+}
+
+#stats-bar{
+          display: flex;
+          background-color:burlywood;
+          justify-content: space-around ;
+          text-align: center;
+}
+#stats-bar .stat-item{
+
+          flex:1;
+}
+.course-grid{
+          display: grid;
+          grid-template-columns: repeat(1,1fr);
+          gap:1 rem;
+}
+
+@media (min-width:768px){
+          .course-grid{
+                    grid-template-columns: repeat(2,1fr);
+          }
+}
+@media(min-width:1024px){
+          .course-grid{
+                    grid-template-columns:repeat(3,1fr)
+          }
+          #hero{
+                    padding: 2%;
+          }
+}
