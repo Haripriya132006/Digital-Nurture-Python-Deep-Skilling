@@ -26,7 +26,7 @@ INSERT INTO enrollments (student_id, course_id, enrollment_date, grade) VALUES
 (2, 1, '2022-07-01', 'B'), (2, 3, '2022-07-01', 'A'),
 (3, 4, '2021-07-01', 'A'), (4, 5, '2023-07-01', NULL),
 (5, 1, '2022-07-01', 'C'), (5, 2, '2022-07-01', 'A'),
-(6, 4, '2021-07-01', 'B'), (7, 5, '2023-07-01', NULL),
+(6, 4, '2021-07-01', 'B'), (4, 5, '2023-07-01', NULL),
 (8, 1, '2022-07-01', 'A'), (8, 3, '2022-07-01', 'B');
 
 INSERT INTO professors (prof_name, email, department_id, salary) VALUES
