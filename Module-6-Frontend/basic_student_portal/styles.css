@@ -89,6 +89,15 @@ header nav ul li a{
           display: grid;
           grid-template-columns: repeat(1,1fr);
           gap:1 rem;
+          margin-bottom: 2rem;
+}
+
+#total-credits{
+          min-width: 80%;
+          background-color: aliceblue;
+          font-weight: bold;
+          justify-self: center;
+          text-align: center;
 }
 
 @media (min-width:768px){

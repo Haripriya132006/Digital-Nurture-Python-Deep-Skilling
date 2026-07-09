@@ -5,6 +5,7 @@
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <title>Student portal</title>
           <link rel="stylesheet" type="text/css" href="./styles.css">
+          <script type=module src="./app.js"></script>
 </head>
 <body>
           <header>
@@ -24,39 +25,17 @@
                               <button>Explore Courses</button>
                     </section>
                     <section id="stats-bar">
-                              <div class="stat-item">Courses Enrolled: 3</div>
+                              <div class="stat-item">Courses Enrolled: 5</div>
                               <div class="stat-item">GPA: 3.8</div>
                               <div class="stat-item">Semester: 6</div>
                     </section>
                     <section id="courses">
-                                        <h2>Courses page</h2>
-                                        <div class="course-grid">
-                                                  <article class="course-card">
-                                                            <h3>course-1</h3><br/>
-                                                            <p>course-1 description</p>
-                                                            <span>credits</span>
-                                                  </article>
-                                                  <article class="course-card">
-                                                            <h3>course-2</h3><br/>
-                                                            <p>course-2 description</p>
-                                                            <span>credits</span>
-                                                  </article>
-                                                  <article class="course-card">
-                                                            <h3>course-3</h3><br/>
-                                                            <p>course-3 description</p>
-                                                            <span>credits</span>
-                                                  </article>
-                                                                                                    <article class="course-card">
-                                                            <h3>course-4</h3><br/>
-                                                            <p>course-3 description</p>
-                                                            <span>credits</span>
-                                                  </article>                                                  <article class="course-card">
-                                                            <h3>course-5</h3><br/>
-                                                            <p>course-3 description</p>
-                                                            <span>credits</span>
-                                                  </article>
-                                        </div>
-                              
+                              <h2>Courses page</h2>
+                              <input id="search-courses" placeholder="Search courses"/>
+                              <button id="sort-credits">Sort by Credits</button>
+                              <div class="course-grid">
+                              </div>
+                              <p id="total-credits"></p>
                     </section>
           </main>
           <footer></footer>
