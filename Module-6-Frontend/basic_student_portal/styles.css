@@ -98,8 +98,17 @@ header nav ul li a{
           font-weight: bold;
           justify-self: center;
           text-align: center;
+          margin: 5%;
 }
 
+#notifications{
+          background-color: rgb(166, 207, 244);
+
+          text-align: center;
+}
+#notifications button{
+          min-width: 5rem;
+}
 @media (min-width:768px){
           .course-grid{
                     grid-template-columns: repeat(2,1fr);
