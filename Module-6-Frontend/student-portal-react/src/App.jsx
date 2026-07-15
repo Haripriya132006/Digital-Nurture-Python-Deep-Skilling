@@ -2,7 +2,9 @@
 import Header from './components/Header';
 import Footer from './components/Footer';
 import CourseCard from './components/CourseCard';
+import StudentProfile from './components/StudentProfile';
 import { useState } from 'react';
+import {useEffect} from 'react';
 function App() {
   const courses=[
     {id:1,name:"Python",code:"IT101",credits:3,grade:"A"},
@@ -13,10 +15,6 @@ function App() {
     
   ]
   const [searchTerm,setSerchTerm]=useState('');
-
-  const filteredCourses=courses.filter(course=>
-    course.name.toLowerCase().includes(searchTerm.toLowerCase())
-  )
   
   const [enrolledCourses,setEnrolledCourses]=useState([]);
 
@@ -33,6 +31,47 @@ function App() {
     setEnrolledCourses([...enrolledCourses,course]);
     
   }
+  // -----------------------------------------------------
+  const [newCourses,setNewCourses]=useState([]);
+  const [loading,setLoading]=useState(true);
+  const[error,setError]=useState(null);
+  const merged=[...courses,...newCourses];
+  
+  useEffect(()=>{
+    fetch('https://jsonplaceholder.typicode.com/posts')
+    .then((response)=>{
+      if(!response.ok){
+        throw new Error('Failed to fetch courses data.');
+      }
+      return response.json();
+    })
+    .then((data)=>{
+      const mapped=data.slice(0,5).map((post)=>({
+        id:post.id+courses.length,
+        name:post.title,
+        code:`CS${post.id+400}`,
+        credits:(post.id%2===0)?4:3,
+        grade:'Pending'
+      }));
+      setNewCourses(mapped);
+      setLoading(false);
+    })
+    .catch((err)=>{
+      setError(err.message);
+      setLoading(false);
+    });
+  },[]);
+
+  useEffect(()=>{
+    if (newCourses.length>0){
+      console.log('Courses updated');
+    } 
+  },[newCourses]) 
+  //only when newCOurses array change is the useeffect done 
+const filteredCourses=merged.filter(course=>
+    course.name.toLowerCase().includes(searchTerm.toLowerCase())
+  )
+
 const noOfEnrolled=enrolledCourses.length;
 
   return (
@@ -43,20 +82,31 @@ const noOfEnrolled=enrolledCourses.length;
         <h2>My Enrolled Courses</h2>
         <input type='text' value={searchTerm} placeholder='search'
         onChange={(e)=>setSerchTerm(e.target.value)}/>
-
-        <div style={cardGrid}>
-          {filteredCourses.map(course => {
-          return (<CourseCard
-            key={course.id}
-            name={course.name}
-            code={course.code}
-            credits={course.credits}
-            grade={course.grade}
-            onEnroll={()=>handleEnroll(course)}
-            isEnrolled={isEnrolled(course)}
-          />);
-          })}
-        </div>
+        { loading
+          ?
+          <h3>Loading....</h3>
+          :
+          error
+          ?
+          <>
+          <h2>There is an error in fetching the courses</h2>
+          </>
+          :
+          <div style={cardGrid}>
+            {filteredCourses.map(course => {
+            return (<CourseCard
+              key={course.id}
+              name={course.name}
+              code={course.code}
+              credits={course.credits}
+              grade={course.grade}
+              onEnroll={()=>handleEnroll(course)}
+              isEnrolled={isEnrolled(course)}
+            />);
+            })}
+          </div>
+        }
+        <StudentProfile/>
       </main>
 
       <Footer />
@@ -74,7 +124,8 @@ const appLayout = {
 const mainContent = {
   flex: 1,
   padding: '20px',
-  backgroundColor: '#f9f9f9',
+  alignContent:'center',
+  justifyItems:'center',
 };
 
 const cardGrid = {
