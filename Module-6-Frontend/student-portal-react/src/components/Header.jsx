@@ -1,19 +1,23 @@
-// import React from 'react';
+import {Link} from 'react-router-dom';
+// import { useContext } from 'react';
+// import { EnrollmentContext } from '../EnrollmentContext';
 
+import { useSelector } from 'react-redux';
 const Header = (props) => {
+          const enrolledCourses=useSelector((state)=>state.enrollment.enrolledCourses);
           return (
           <>
           <header style={headerStyle}>
                     <h1>{props.siteName}</h1>
                     <nav>
                               <ul style={navLinksStyle}>
-                                        <li><a href="#home">Home</a></li>
-                                        <li><a href="#courses">Courses</a></li>
-                                        <li><a href="#profile">Profile</a></li>
+                                        <li><Link to="#home">Home</Link></li>
+                                        <li><Link to="#courses">Courses</Link></li>
+                                        <li><Link to="#profile">Profile</Link></li>
                               </ul>
                     </nav>
           </header>
-          <h3>Number of Courses Enrolled: {props.enrolled}</h3>
+          <h3>Number of Courses Enrolled: {enrolledCourses.length}</h3>
           </>
           );
 };
