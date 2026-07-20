@@ -1,0 +1,113 @@
+
+explain format=JSON
+select s.first_name ,s.last_name,c.course_name
+from enrollments e join students s 
+on s.student_id=e.student_id
+join courses c 
+on c.course_id=e.course_id
+where s.enrollment_year=2022;
+
+-- RESULT 
+-- {
+--   "query_block": {
+--     "select_id": 1,
+--     "cost_info": {
+--       "query_cost": "2.10"
+--     },
+--     "nested_loop": [
+--       {
+--         "table": {
+--           "table_name": "s",
+--           "access_type": "ALL",
+--           "possible_keys": [
+--             "PRIMARY"
+--           ],
+--           "rows_examined_per_scan": 8,
+--           "rows_produced_per_join": 1,
+--           "filtered": "12.50",
+--           "cost_info": {
+--             "read_cost": "0.95",
+--             "eval_cost": "0.10",
+--             "prefix_cost": "1.05",
+--             "data_read_per_join": "824"
+--           },
+--           "used_columns": [
+--             "student_id",
+--             "first_name",
+--             "last_name",
+--             "enrollment_year"
+--           ],
+--           "attached_condition": "(`college_db`.`s`.`enrollment_year` = 2022)"
+--         }
+--       },
+--       {
+--         "table": {
+--           "table_name": "e",
+--           "access_type": "ref",
+--           "possible_keys": [
+--             "student_id",
+--             "course_id"
+--           ],
+--           "key": "student_id",
+--           "used_key_parts": [
+--             "student_id"
+--           ],
+--           "key_length": "5",
+--           "ref": [
+--             "college_db.s.student_id"
+--           ],
+--           "rows_examined_per_scan": 1,
+--           "rows_produced_per_join": 1,
+--           "filtered": "100.00",
+--           "cost_info": {
+--             "read_cost": "0.38",
+--             "eval_cost": "0.15",
+--             "prefix_cost": "1.58",
+--             "data_read_per_join": "48"
+--           },
+--           "used_columns": [
+--             "student_id",
+--             "course_id"
+--           ],
+--           "attached_condition": "(`college_db`.`e`.`course_id` is not null)"
+--         }
+--       },
+--       {
+--         "table": {
+--           "table_name": "c",
+--           "access_type": "eq_ref",
+--           "possible_keys": [
+--             "PRIMARY"
+--           ],
+--           "key": "PRIMARY",
+--           "used_key_parts": [
+--             "course_id"
+--           ],
+--           "key_length": "4",
+--           "ref": [
+--             "college_db.e.course_id"
+--           ],
+--           "rows_examined_per_scan": 1,
+--           "rows_produced_per_join": 1,
+--           "filtered": "100.00",
+--           "cost_info": {
+--             "read_cost": "0.38",
+--             "eval_cost": "0.15",
+--             "prefix_cost": "2.10",
+--             "data_read_per_join": "1K"
+--           },
+--           "used_columns": [
+--             "course_id",
+--             "course_name"
+--           ]
+--         }
+--       }
+--     ]
+--   }
+-- }
+
+-- 2. TABLE SCAN IDENTIFICATION:
+-- Yes, the query plan shows a Full Table Scan on the students table (aliased as 's'), indicated by "access_type": "ALL".
+
+-- 3. ROWS EXAMINED:
+-- The total estimated query cost is 2.10, and the rows examined for the baseline scan on the students table is 8.

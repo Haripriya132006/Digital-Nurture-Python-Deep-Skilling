@@ -76,7 +76,3 @@ start transaction;
     
     rollback to savepoint first_insert;
 commit;
-
-    
-
-    
